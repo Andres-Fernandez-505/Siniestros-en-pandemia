@@ -502,7 +502,8 @@ WHERE MONTH(a.acci_fech) IN (4, 12)
 GROUP BY MONTH(a.acci_fech)
 ORDER BY MONTH(a.acci_fech);
 ```
-Con esta consulta se ve el mes con números. 
+Con esta consulta se ve el mes con números.
+
 ![image.png](image7.png)
 
 ```jsx
@@ -517,7 +518,8 @@ ORDER BY MONTH(a.acci_fech);
 
 ```
 Con esta consulta se pueden ver los nombres de los meses.
-![image.png](image%208.png)
+
+![image.png](image8.png)
 
 **Todos los accidentes en los que participaron autos y motos , los dias sabado y domingo en todo el 2020**
 
