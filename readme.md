@@ -9,6 +9,23 @@ En nuestro caso hemos seleccionado una base de datos de siniestros viales del a�
 A continuación detallaremos el paso a paso.
 
 ## Índice
+1. [Descarga de la base de datos](#descarga-de-la-base-de-datos)
+2. [Importar archivo CSV](#importar-archivo-csv)
+3. [Creación del diagrama de la base de datos](#creación-del-diagrama-de-la-base-de-datos)
+4. [Organizar y dividir la información](#organizar-y-dividir-la-información)
+	1. [Creación de Tablas](#creación-de-tablas)
+ 	2. [Inserción de datos](#inserción-de-datos)
+ 	3. [Relación entre tablas y accidentes](#relación-entre-tablas-y-accidentes)
+  	4. [Actualizar `desc_loc` con los códigos de localidad](#actualizar-desc_loc-con-los-códigos-de-localidad)
+   	5. [Cambiar el Tipo de Datos de `desc_loc`](#cambiar-el-tipo-de-datos-de-desc_loc)
+   	6. [Establecer la Clave Foránea entre `accidentes` y `localidades`](#establecer-la-clave-foránea-entre-accidentes-y-localidades)
+   	7. [Actualizar `desc_dia` con los Códigos de los Días](#actualizar-desc_dia-con-los-códigos-de-los-días)
+   	8. [Agregar la Clave Foránea entre `accidentes` y `dias`](#agregar-clave-foránea:)
+   	9. [Eliminar columnas](#eliminar-columnas)
+   	10. [Renombrar columnas](#renombrar-columnas)
+5. [Consultas](#consultas)
+6. [Bibliografía](#bibliografía)
+
 
 ## Descarga de la base de datos
 
@@ -215,7 +232,7 @@ JOIN (SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNI
 JOIN participantes p ON TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(a.desc_participante, ',', n.n), ',', -1)) = p.part_desc;
 ```
 
-### Relacion entre tablas y accidentes
+## Relacion entre tablas y accidentes
 
 ### **Actualizar `desc_loc` con los códigos de localidad**
 
@@ -278,7 +295,7 @@ El mismo proceso lo repetimos para la columna de dias ya que es otro dato que se
 
 ### **Actualizar `desc_dia` con los Códigos de los Días**
 
-### **IMPORTANTE**
+#### **IMPORTANTE**
 
 Es probable que la columna `desc_dia` sea de tipo `VARCHAR` o `TEXT`, ya que almacena nombres de días. Necesitamos cambiar su tipo de datos a `INT` para poder almacenar los códigos numéricos.
 
@@ -458,9 +475,9 @@ ALTER TABLE accidentes CHANGE calle_avenida_km acci_ubic VARCHAR(200);
 
 ## Consultas
 
-Detallamos las diferentes consultas que realizamos sobre la base de datos
+Detallamos las diferentes consultas que realizamos sobre la base de datos.
 
-Mes de mayor cantidad de accidentes por localidad en el año
+### Mes de mayor cantidad de accidentes por localidad en el año
 
 ```jsx
 SELECT sub.Localidad, 
@@ -491,7 +508,7 @@ AND sub.Total_Accidentes = max_accidents.Max_Accidentes
 ORDER BY sub.Total_Accidentes DESC;
 ```
 
-1. Cantidad de accidentes realizados en el mes de abril (mes de inicio de pandemia) y el mes de diciembre (último mes )
+### Cantidad de accidentes realizados en el mes de abril (mes de inicio de pandemia) y el mes de diciembre (último mes )
 
 ```jsx
 SELECT 
@@ -521,7 +538,7 @@ Con esta consulta se pueden ver los nombres de los meses.
 
 ![image.png](image8.png)
 
-**Todos los accidentes en los que participaron autos y motos , los dias sabado y domingo en todo el 2020**
+### Todos los accidentes en los que participaron autos y motos , los dias sabado y domingo en todo el 2020
 
 ```jsx
 SELECT 
@@ -538,7 +555,7 @@ GROUP BY d.dia_desc
 ORDER BY d.dia_cod;
 ```
 
-Las 5 ciudades con mas accidentes
+### Las 5 ciudades con mas accidentes
 
 ```sql
 SELECT l.loca_desc AS ciudad, COUNT(a.acci_cod) AS total_accidentes
@@ -552,7 +569,7 @@ LIMIT 5;
 
 ![image.png](image9.png)
 
-Accidentes en las horas pico de los meses de abril (inicio de la cuarentena) y diciembre (último mes del año)
+### Accidentes en las horas pico de los meses de abril (inicio de la cuarentena) y diciembre (último mes del año)
 
 ```jsx
 SELECT 
@@ -572,7 +589,7 @@ GROUP BY Mes, Horario_Pico
 ORDER BY FIELD(Mes, 'Abril (Inicio de la cuarentena)', 'Diciembre (Último mes del año)'), Horario_Pico;
 ```
 
-Ocurren mas accidentes de dia o de noche?
+### Ocurren mas accidentes de dia o de noche?
 
 ```jsx
 SELECT 
@@ -586,7 +603,7 @@ GROUP BY Periodo
 ORDER BY Periodo;
 ```
 
-Cuales son las horas mas peligrosas?
+### Cuales son las horas mas peligrosas?
 
 ```jsx
 SELECT 
@@ -598,7 +615,7 @@ ORDER BY Total_Accidentes DESC;
 
 ```
 
-Total de ilesos, heridos leves, graves y muertos en el 2020
+### Total de ilesos, heridos leves, graves y muertos en el 2020
 
 ```jsx
 SELECT 
@@ -611,7 +628,7 @@ WHERE YEAR(a.acci_fech) = 2020;  -- Filtra los datos para el año 2020
 
 ```
 
-Segun las estadisticas cual es la posibilidad de fallecer en un choque?
+### Segun las estadisticas cual es la posibilidad de fallecer en un choque?
 
 ```jsx
 SELECT 
@@ -620,7 +637,7 @@ FROM accidentes a
 WHERE YEAR(a.acci_fech) = 2020;
 ```
 
- Top 5 localidad con mas accidentes y su departamento .
+### Top 5 localidad con mas accidentes y su departamento .
 
 ```jsx
 SELECT 
