@@ -20,7 +20,7 @@ A continuación detallaremos el paso a paso.
    	5. [Cambiar el Tipo de Datos de `desc_loc`](#cambiar-el-tipo-de-datos-de-desc_loc)
    	6. [Establecer la Clave Foránea entre `accidentes` y `localidades`](#establecer-la-clave-foránea-entre-accidentes-y-localidades)
    	7. [Actualizar `desc_dia` con los Códigos de los Días](#actualizar-desc_dia-con-los-códigos-de-los-días)
-   	8. [Agregar la Clave Foránea entre `accidentes` y `dias`](#agregar-clave-foránea:)
+   	8. [Agregar la Clave Foránea entre `accidentes` y `dias`](#agregar-la-clave-foránea:)
    	9. [Eliminar columnas](#eliminar-columnas)
    	10. [Renombrar columnas](#renombrar-columnas)
 5. [Consultas](#consultas)
