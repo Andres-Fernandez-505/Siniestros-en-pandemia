@@ -30,21 +30,21 @@ Para importar el archivo “accidentes.csv” en **HeidiSQL**, se deben seguir l
 
 ![image.png](image.png)
 
-1. Se va abrir esta ventana donde vamos a cargar nuestro archivo CSV con la configuración como se muestra en la imagen.
+2. Se va abrir esta ventana donde vamos a cargar nuestro archivo CSV con la configuración como se muestra en la imagen.
 
-![image.png](image%201.png)
+![image.png](image1.png)
 
 Debe estar configurado de la misma forma como se muestra en la imagen. En la primera línea se debe elegir el archivo “.csv”.   En la sección “Destino” se debe colocar la base de datos ya creada y en la opción tabla seleccionar nueva tabla.
 
-1. Al momento de crear una tabla nueva, va a salir esta ventana donde se debe presionar en “OK, crear tabla”.
+3. Al momento de crear una tabla nueva, va a salir esta ventana donde se debe presionar en “OK, crear tabla”.
 
-![image.png](image%202.png)
+![image.png](image2.png)
 
 Luego volverá a la pantalla anterior en donde se debe presionar el botón “!Importar¡”
 
-1. Generaremos una tabla que contendrá toda la información de forma completa. Posteriormente, esta información se dividirá en diferentes tablas para organizar de manera más eficiente y clara la estructura de la base de datos
+4. Generaremos una tabla que contendrá toda la información de forma completa. Posteriormente, esta información se dividirá en diferentes tablas para organizar de manera más eficiente y clara la estructura de la base de datos
 
-![image.png](image%203.png)
+![image.png](image3.png)
 
 ## Creación del diagrama de la base de datos
 
@@ -270,7 +270,7 @@ FOREIGN KEY (desc_loc) REFERENCES localidades(loca_cod);
 
 ```
 
-![Si todo sale bien deberia verse el icono de esa llavecita verde](image%204.png)
+![Imagen con llave](image4.png)
 
 Si todo sale bien deberia verse el icono de esa llavecita verde
 
@@ -310,11 +310,11 @@ FOREIGN KEY (desc_dia) REFERENCES dias(dia_cod);
 
 ```
 
-![Antes de ejecutar la sentencia SQL](image%205.png)
+![Antes de ejecutar la sentencia SQL](image5.png)
 
 Antes de ejecutar la sentencia SQL
 
-![Si todo sale bien deberia verse asi](image%206.png)
+![Si todo sale bien deberia verse asi](image6.png)
 
 Si todo sale bien deberia verse asi
 
@@ -502,6 +502,8 @@ WHERE MONTH(a.acci_fech) IN (4, 12)
 GROUP BY MONTH(a.acci_fech)
 ORDER BY MONTH(a.acci_fech);
 ```
+Con esta consulta se ve el mes con números. 
+![image.png](image7.png)
 
 ```jsx
 SELECT 
@@ -514,9 +516,7 @@ GROUP BY MONTH(a.acci_fech)
 ORDER BY MONTH(a.acci_fech);
 
 ```
-
-![image.png](image%207.png)
-
+Con esta consulta se pueden ver los nombres de los meses.
 ![image.png](image%208.png)
 
 **Todos los accidentes en los que participaron autos y motos , los dias sabado y domingo en todo el 2020**
@@ -536,7 +536,7 @@ GROUP BY d.dia_desc
 ORDER BY d.dia_cod;
 ```
 
-5 ciudades con mas accidentes
+Las 5 ciudades con mas accidentes
 
 ```sql
 SELECT l.loca_desc AS ciudad, COUNT(a.acci_cod) AS total_accidentes
@@ -548,7 +548,7 @@ LIMIT 5;
 
 ```
 
-![image.png](image%209.png)
+![image.png](image9.png)
 
 Accidentes en las horas pico de los meses de abril (inicio de la cuarentena) y diciembre (último mes del año)
 
