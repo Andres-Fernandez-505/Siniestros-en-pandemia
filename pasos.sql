@@ -1,3 +1,5 @@
+CREATE DATABASE siniestros;
+
 CREATE TABLE backup_accidentes AS SELECT * FROM accidentes;
 
 ALTER TABLE accidentes CHANGE nro_acci acci_cod INT;
